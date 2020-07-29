@@ -1,10 +1,12 @@
-from flask import Flask,render_template
+from flask import Flask,render_template,Blueprint
 from flask_login import LoginManager
 
+from Flask_blog.user.views import user
 from Flask_blog.config_loader import BaseConfig
 
 config = BaseConfig("config.json")
 app = Flask(__name__)
+app.register_blueprint(user,url_prefix="/auth")
 try:
     app.config["secret_key"] = config.configuration["secret_key"]
     login_manager = LoginManager()
