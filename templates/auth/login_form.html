@@ -2,6 +2,7 @@
 {% block content %}
 <form action={{url_for("user.signup")}} method="post" style="max-width:480px;margin: auto">
     <h1>Please Sign In</h1>
+    {{ form.csrf_token }}
     <div class="w-75">
         {{form.username(class="form-control")}}
     </div>

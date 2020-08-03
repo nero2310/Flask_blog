@@ -7,13 +7,13 @@ from Flask_blog.config_loader import BaseConfig
 config = BaseConfig("config.json")
 app = Flask(__name__)
 app.register_blueprint(user,url_prefix="/auth")
-try:
-    app.config["secret_key"] = config.configuration["secret_key"]
-    login_manager = LoginManager()
-    login_manager.init_app(app)
-except KeyError:
-    print("Your config file doesn't contain secret key")
-    exit(0)
+# try:
+app.config["SECRET_KEY"] = config.configuration["secret_key"]
+login_manager = LoginManager()
+login_manager.init_app(app)
+# except KeyError:
+# print("Your config file doesn't contain secret key")
+# exit(0)
 
 
 @app.route("/")
