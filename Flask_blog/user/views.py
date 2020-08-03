@@ -5,10 +5,10 @@ from Flask_blog.user.models import UserModel
 user = Blueprint("user", __name__)
 
 
-@user.route("/user", methods=["GET","POST"])
+@user.route("/user", methods=["GET", "POST"])
 def signup():
     form = UserRegisterForm(request.form)
-    if request.method =="POST" and form.validate():
-        user = UserModel(form.username,"dummy_data@wp.pl",form.password)
-        flash(f"Thanks for register {form.username}")
+    if form.validate_on_submit():
+        user = UserModel(form.username, form.email, form.password).signup()
+        # flash(f"Thanks for register {form.username.data}")
     return render_template("auth/login_form.html", form=UserRegisterForm())
