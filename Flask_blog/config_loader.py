@@ -1,5 +1,5 @@
 import os.path
-import json
+from json import dump,load
 
 
 def create_base_config(path):
@@ -7,7 +7,7 @@ def create_base_config(path):
         "secret_key": os.urandom(20).hex()
     }
     with open(path, "w") as file:
-        file.write(str(config))
+       dump(config,file)
     return config
 
 
@@ -15,7 +15,7 @@ class BaseConfig:
     def __init__(self, path):
         try:
             with open(path, "r") as file:
-                self.configuration = json.load(file)
+                self.configuration = load(file)
         except FileNotFoundError:
             self.configuration = create_base_config(path)
 
