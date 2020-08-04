@@ -1,0 +1,41 @@
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static',filename='css/style.css')}}"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Recursive:wght@500&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    {% block title %} {% endblock %}
+  </head>
+  <body>
+   <nav>
+      <div class="logo-container">
+        <img
+          src="{{url_for('static',filename='img/blog_logo.svg')}}"
+          class="logo-img"
+          alt=""
+        />
+      </div>
+      <div class="right-nav">
+        <ul class="hlinks">
+          <li>Blog</li>
+          <li>About</li>
+          <li>Sign in</li>
+          <li>sss</li>
+        </ul>
+      </div>
+      </nav>
+      <div class="page-mid">
+        <div class="bg-img-container">
+          <img  class="bg-img" src="{{url_for('static',filename='img/Skilline_1.png')}}" alt="">
+        </div>
+        <div class="page-content">
+          {% block content %} {% endblock %}
+        </div>
+      </div>
+    </div>
+    <footer></footer>
+  </body>
+</html>
