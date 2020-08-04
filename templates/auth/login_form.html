@@ -7,13 +7,21 @@
         {{form.username(class="form-control")}}
     </div>
     <div class="w-75">
+        {{form.email(class="form-control")}}
+    </div>
+    <div class="w-75">
         {{form.password(class="form-control")}}
     </div>
     <div class="w-75">
-        {{form.email(class="form-control")}}
+        {{form.confirm_password(class="form-control")}}
     </div>
     <div class="form-group">
        {{form.submit(class="btn btn-primary")}}
     </div>
+    {% for field in form.errors %}
+    {% for error in form.errors[field] %}
+        <div class="error">{{ error }}</div>
+    {% endfor %}
+    {% endfor %}
 </form>
 {% endblock %}

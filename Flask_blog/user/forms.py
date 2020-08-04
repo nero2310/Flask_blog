@@ -1,5 +1,4 @@
-from flask_wtf import Form
-from wtforms import PasswordField, StringField, validators, SubmitField
+from wtforms import Form, PasswordField, StringField, validators, SubmitField
 
 
 class UserRegisterForm(Form):
@@ -9,12 +8,13 @@ class UserRegisterForm(Form):
 
     password = PasswordField("password", validators=[
         validators.Length(min=8, max=64, message="Your password must contain between 8 and 64 characters"),
-        validators.DataRequired(), validators.EqualTo("confirm_password", message="Password must match")]
-                             , render_kw={"placeholder": "Enter a password"})
+        validators.DataRequired(), validators.EqualTo("confirm_password", message="Password must match")],
+        render_kw={"placeholder": "Enter a password"})
 
-    email = StringField("Email", validators=[validators.email(message="Please enter your email adress."),
-                        validators.DataRequired()],render_kw={"placeholder":"Enter a email"})
+    email = StringField("Email", validators=[validators.email(message="This is not a valid email adress"),
+                                             validators.DataRequired()], render_kw={"placeholder": "Enter a email"})
 
-    confirm_password = PasswordField("Repeat password", validators=[validators.DataRequired()])
+    confirm_password = PasswordField("Repeat password", validators=[validators.DataRequired()],
+                                     render_kw={"placeholder": "Repeat password"})
 
     submit = SubmitField("Sign Up")
