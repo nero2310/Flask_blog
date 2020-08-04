@@ -4,7 +4,6 @@ from pytest import raises
 from os import environ
 
 
-
 def test_env_variables():
     load_environment_variables()
     assert environ["env"]

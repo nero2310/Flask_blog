@@ -8,7 +8,7 @@ user = Blueprint("user", __name__)
 @user.route("/user", methods=["GET", "POST"])
 def signup():
     form = UserRegisterForm(request.form)
-    if form.validate() and request.method=="POST":
+    if form.validate() and request.method == "POST":
         user = UserModel(form.username, form.email, form.password).signup()
         flash(f"Thanks for register {form.username.data}")
     return render_template("auth/login_form.html", form=form)
