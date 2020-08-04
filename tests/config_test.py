@@ -1,9 +1,13 @@
-from Flask_blog.config_loader import BaseConfig
-import pytest
+from Flask_blog.config_loader import load_environment_variables
+from pytest import raises
+
+from os import environ
 
 
-def test_base_conf(tmp_path):  # get_secret_key shoudln't casue exception
-    path = tmp_path / "test_dir"
-    path.mkdir()
-    config = BaseConfig(path / "config.json")
-    assert config.get_secret_key()
+
+def test_env_variables():
+    load_environment_variables()
+    assert environ["env"]
+    assert environ["secret_key"]
+    with raises(KeyError):
+        assert environ["random_word_blalalla"]  # check if exception is raised

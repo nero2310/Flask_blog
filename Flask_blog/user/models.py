@@ -16,3 +16,7 @@ class UserModel:
         }
         print(user)
         return jsonify(user), 200
+
+    # @property
+    # def hash(self):
+        # return
