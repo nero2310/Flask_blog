@@ -6,6 +6,7 @@ from json import dump, load
 
 
 def create_base_config(path):
+    """:arg """
     config = f"secret_key={os.urandom(20).hex()}\n" \
              f"env=production"
     with open(path, "w") as file:
