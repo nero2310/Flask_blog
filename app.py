@@ -20,7 +20,7 @@ except KeyError:
 
 @app.route("/")
 def hello_word():
-    return render_template("site/base_bootstrap.html")
+    return render_template("site/base.html")
 
 
 @app.route("/login")
