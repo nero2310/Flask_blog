@@ -1,0 +1,15 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.test {
+  width: 500px;
+  height: 400px;
+  background-color: blue;
+}
+
+p {
+  color: red;
+}

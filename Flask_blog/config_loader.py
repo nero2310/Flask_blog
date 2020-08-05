@@ -1,23 +1,21 @@
 import os.path
-import json
+from dotenv import load_dotenv
+from os import environ
 
 
 def create_base_config(path):
-    config = {
-        "secret_key": os.urandom(20).hex()
-    }
+    """Create configuration file
+    :arg path path to config file
+    """
+    config = f"secret_key={os.urandom(20).hex()}\n" \
+             f"env=production"
     with open(path, "w") as file:
-        file.write(str(config))
-    return config
+        file.write(config)
 
 
-class BaseConfig:
-    def __init__(self, path):
-        try:
-            with open(path, "r") as file:
-                self.configuration = json.load(file)
-        except FileNotFoundError:
-            self.configuration = create_base_config(path)
-
-    def get_secret_key(self):
-        return self.configuration["secret_key"]
+def load_environment_variables(path_to_file=".env"):
+    """ :arg path_to_file load environment variables from file """
+    try:
+        load_dotenv(dotenv_path=path_to_file)
+    except FileExistsError:
+        raise FileExistsError("Environment file not found")
