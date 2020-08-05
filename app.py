@@ -5,17 +5,27 @@ from flask import Flask, render_template
 
 from Flask_blog.user.views import user
 from Flask_blog.config_loader import load_environment_variables
+from Flask_blog.database.db import Mongo
 
-load_environment_variables(".env")
-app = Flask(__name__)
-app.register_blueprint(user, url_prefix="/auth")
-try:
-    app.config["SECRET_KEY"] = environ["secret_key"]
-    # login_manager = LoginManager()
-    # login_manager.init_app(app)
-except KeyError:
-    print("Your config file doesn't contain secret key")
-    exit(0)
+
+def create_app():
+    load_environment_variables(".env")
+    app = Flask(__name__)
+    app.config["MONGO_URI"] = environ["MONGO_URI"]
+    database = Mongo(app)
+    app.register_blueprint(user, url_prefix="/auth")
+    try:
+        app.config["SECRET_KEY"] = environ["secret_key"]
+        # login_manager = LoginManager()
+        # login_manager.init_app(app)
+    except KeyError:
+        print("Your config file doesn't contain secret key")
+        exit(0)
+    return app, database
+
+
+app, database = create_app()
+print(database.find("all", {}, {"name": 0}))
 
 
 @app.route("/")
