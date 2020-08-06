@@ -1,17 +1,16 @@
-import pymongo
+from pymongo import MongoClient
 from typing import Dict
 from flask_pymongo import PyMongo
 
 
-class Mongo(PyMongo):
-    def __init__(self, app=None, database="test", collection="user"):
+class Mongo:
+    def __init__(self,database="test", collection="user"):
         """
         Class to work with mongoDB
         :arg database - database you will use
         :arg collection - collection you wii use
         """
-        super().__init__(app=app)
-        mongo_client = pymongo.MongoClient('localhost', 2717)
+        mongo_client = MongoClient('localhost', 2717)
         db = mongo_client[database]
         self.collection = db[collection]
 
