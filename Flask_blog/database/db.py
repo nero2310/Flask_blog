@@ -1,10 +1,10 @@
-from pymongo import MongoClient
 from typing import Dict
-from flask_pymongo import PyMongo
+
+from pymongo import MongoClient
 
 
 class Mongo:
-    def __init__(self,database="test", collection="user"):
+    def __init__(self, database="test", collection="user"):
         """
         Class to work with mongoDB
         :arg database - database you will use
@@ -14,11 +14,13 @@ class Mongo:
         db = mongo_client[database]
         self.collection = db[collection]
 
-    def find(self, how_many="one", data_filter=None, projection={}):
+    def find(self, how_many="one", data_filter=None, projection=None):
         """:arg how_many how many results should be returned possible values "one" or "all"
         :arg data_filter filter data to return
         :arg projection specify whose columns values should be returned
         :return string or list"""
+        if projection is None:
+            projection = {}
         if data_filter is None:
             data_filter = {}
         if how_many == "one":
@@ -27,6 +29,6 @@ class Mongo:
             cursor = self.collection.find(data_filter, projection)
             return [document for document in cursor]
 
-    def insert(self,data_to_insert:Dict):
+    def insert(self, data_to_insert: Dict):
         """:arg data_to_insert data whose wil be inserted into database"""
         self.collection.insert_one(data_to_insert)

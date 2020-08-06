@@ -1,6 +1,6 @@
 import os.path
+
 from dotenv import load_dotenv
-from os import environ
 
 
 def create_base_config(path):

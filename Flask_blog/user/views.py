@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request
-from Flask_blog.user.forms import UserRegisterForm
+
 from Flask_blog.database.db import Mongo
+from Flask_blog.user.forms import UserRegisterForm
 
 user = Blueprint("user", __name__)
 
