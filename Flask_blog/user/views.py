@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 
 from Flask_blog.database.db import Mongo
 from Flask_blog.user.forms import UserRegisterForm
@@ -18,4 +18,11 @@ def signup():
             "password": form.password.data,
         }
         database.insert(user)
+        flash(message="Your account has been registered")
+        return redirect(url_for("user.signup_sucess", _method="GET"))
     return render_template("auth/login_form.html", form=form)
+
+@user.route("/sucess",methods=["GET"])
+def signup_sucess():
+    return render_template("auth/sucess.html")
+    
