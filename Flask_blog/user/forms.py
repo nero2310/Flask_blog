@@ -11,9 +11,6 @@ class UserRegisterForm(Form):
         validators.DataRequired(), validators.EqualTo("confirm_password", message="Password must match")],
                              render_kw={"placeholder": "Enter a password"})
 
-    email = StringField("Email", validators=[validators.email(message="This is not a valid email address"),
-                                             validators.DataRequired()], render_kw={"placeholder": "Enter a email"})
-
     confirm_password = PasswordField("Repeat password", validators=[validators.DataRequired()],
                                      render_kw={"placeholder": "Repeat password"})
 
