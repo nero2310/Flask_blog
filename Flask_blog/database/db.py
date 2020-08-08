@@ -18,7 +18,7 @@ class Mongo:
         """:arg how_many how many results should be returned possible values "one" or "all"
         :arg data_filter filter data to return
         :arg projection specify whose columns values should be returned
-        :return string or list"""
+        :return string or list or None if nothing found"""
         if projection is None:
             projection = {}
         if data_filter is None:

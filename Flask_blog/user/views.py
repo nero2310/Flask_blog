@@ -9,8 +9,13 @@ user = Blueprint("user", __name__)
 database = Mongo()
 
 
-def create_hash(password):
-    return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt(rounds=14)).decode("utf-8") #toDo export salt to .env file
+def create_hash(password: str):
+    """
+    Create password hash using bcrypt
+    :param password:
+    :return: password hash
+    """
+    return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt(rounds=14)).decode("utf-8")
 
 
 @user.route("/register", methods=["GET", "POST"])
@@ -22,9 +27,14 @@ def signup():
             "email": form.email.data,
             "password_hash": create_hash(form.password.data)
         }
-        database.insert(user)
-        flash(message=f"Your account has been registered {form.username.data}")
-        return redirect(url_for("user.signup_sucess", _method="GET"))
+        if database.find(data_filter={"username": form.username.data}) is None:
+            print(database.find({"username":form.username.data}))
+            database.insert(user)
+            flash(message=f"Your account has been registered {form.username.data}")
+            return redirect(url_for("user.signup_sucess", _method="GET"))
+        else:
+            flash(message="An account with this nickname already exists")
+            return redirect(url_for("user.signup_sucess", _method="GET"))
     return render_template("auth/signup_form.html", form=form)
 
 
