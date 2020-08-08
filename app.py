@@ -25,7 +25,7 @@ def create_app():
 
     @app.route("/login")
     def login_page():
-        return render_template("auth/login_form.html")
+        return render_template("auth/signup_form.html")
 
     app.register_blueprint(user, url_prefix="/auth")
 
