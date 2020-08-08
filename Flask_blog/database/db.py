@@ -1,5 +1,6 @@
-import pymongo
 from typing import Dict
+
+from pymongo import MongoClient
 
 
 class Mongo:
@@ -9,23 +10,25 @@ class Mongo:
         :arg database - database you will use
         :arg collection - collection you wii use
         """
-        mongo_client = pymongo.MongoClient('localhost', 2717)
+        mongo_client = MongoClient('localhost', 2717)
         db = mongo_client[database]
         self.collection = db[collection]
-        print("Działa")
 
-    def find(self, how_many="one", data_filter=None):
-        """:arg how_many how many results should be returned
+    def find(self, how_many="one", data_filter=None, projection=None):
+        """:arg how_many how many results should be returned possible values "one" or "all"
         :arg data_filter filter data to return
-        :return string or list"""
+        :arg projection specify whose columns values should be returned
+        :return string or list or None if nothing found"""
+        if projection is None:
+            projection = {}
         if data_filter is None:
             data_filter = {}
         if how_many == "one":
-            return self.collection.find_one(data_filter)
+            return self.collection.find_one(data_filter, projection)
         elif how_many == "all":
-            cursor = self.collection.find(data_filter)
+            cursor = self.collection.find(data_filter, projection)
             return [document for document in cursor]
 
-
-db_obj = Mongo()
-print(db_obj.find("all"))
+    def insert(self, data_to_insert: Dict):
+        """:arg data_to_insert data whose wil be inserted into database"""
+        self.collection.insert_one(data_to_insert)

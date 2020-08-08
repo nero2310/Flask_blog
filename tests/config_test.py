@@ -8,5 +8,6 @@ def test_env_variables():
     load_environment_variables()
     assert environ["env"]
     assert environ["secret_key"]
+    assert environ["MONGO_URI"]
     with raises(KeyError):
         assert environ["random_word_blalalla"]  # check if exception is raised
