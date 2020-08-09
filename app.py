@@ -1,6 +1,6 @@
 from os import environ
 
-from flask import Flask, render_template
+from flask import Flask, render_template,redirect,url_for,session
 # from flask_login import LoginManager
 
 from Flask_blog.user.views import user
@@ -27,6 +27,10 @@ def create_app():
     def login_page():
         return render_template("auth/signup_form.html")
 
+    @app.route("/logout")
+    def logout():
+        session.pop("username")
+        return redirect(url_for("main_page"))
     app.register_blueprint(user, url_prefix="/auth")
 
     return app

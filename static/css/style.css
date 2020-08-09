@@ -11,6 +11,7 @@ body {
 }
 
 .navbar {
+  position: relative;
   display:flex;
   justify-content: space-between;
   align-items: center;
@@ -47,4 +48,22 @@ body {
 a {
   color:inherit;
   text-decoration: none;
+}
+
+.dropdown {
+  clear: both;
+  position: relative;
+}
+
+.dropdown-element-1 a{
+  top: 10px;
+  padding: 20px !important;
+  color: darkblue !important;
+  position: absolute;
+}
+.dropdown-element-2 a{
+  margin-top: 30px;
+  padding: 20px !important;
+  color: darkblue !important;
+  position: absolute;
 }
