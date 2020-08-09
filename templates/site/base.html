@@ -20,12 +20,13 @@
            <li><a href=#>HOME</a></li>
            <li><a href=#>Faq</a></li>
             {% if session["username"] %}
-               <li><a href=#>{{session["username"]}}</a>
+            <div>
             <ul class="dropdown">
+                <li><a href=#>{{session["username"]}}</a></li>
                 <li class="dropdown-element-1"><a href="">Profile</a></li>
                 <li class="dropdown-element-2"><a href="{{url_for("logout")}}">Sign out</a></li>
             </ul>
-               </li>
+            </div>
             {% else %}
             <li><a href="{{url_for("user.log_in")}}">Login</a></li>
             <li><a href="{{url_for("user.signup")}}">Register</a></li>

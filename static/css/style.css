@@ -57,11 +57,19 @@ a {
   display:none;
 }
 
+.dropdown:hover .dropdown-element-1 a{
+  display: block !important;
+}
+
+.dropdown:hover .dropdown-element-2 a{
+  display: block !important;
+}
+
 .dropdown-element-1 a{
   white-space: nowrap;
-  display: none;
+  display: none !important;
   background-color: orange;
-  top: 12px;
+  top: 52px;
   right: 0px;
   width: 150%;
   padding: 20px !important;
@@ -70,9 +78,9 @@ a {
 }
 .dropdown-element-2 a{
   white-space: nowrap;
-  display: block;
+  display: none !important;
   background-color: orange;
-  top: 72px;
+  top: 102px;
   right: 0px;
   width: 150%;
   padding: 20px !important;
