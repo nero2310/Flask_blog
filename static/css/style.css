@@ -1,10 +1,11 @@
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 body {
-  padding: 0;
-  margin: 0;
+
   /*background-color: #7d838c;*/
   background-color:white;
 
@@ -53,16 +54,27 @@ a {
 .dropdown {
   clear: both;
   position: relative;
+  display:none;
 }
 
 .dropdown-element-1 a{
-  top: 10px;
+  white-space: nowrap;
+  display: none;
+  background-color: orange;
+  top: 12px;
+  right: 0px;
+  width: 150%;
   padding: 20px !important;
   color: darkblue !important;
   position: absolute;
 }
 .dropdown-element-2 a{
-  margin-top: 30px;
+  white-space: nowrap;
+  display: block;
+  background-color: orange;
+  top: 72px;
+  right: 0px;
+  width: 150%;
   padding: 20px !important;
   color: darkblue !important;
   position: absolute;
