@@ -32,3 +32,6 @@ class Mongo:
     def insert(self, data_to_insert: Dict):
         """:arg data_to_insert data whose wil be inserted into database"""
         self.collection.insert_one(data_to_insert)
+
+    def aggregate(self):
+        self.collection.aggregate()

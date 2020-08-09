@@ -10,30 +10,26 @@
     {% block title %} {% endblock %}
   </head>
   <body>
-   <nav>
-      <div class="logo-container">
-        <img
-          src="{{url_for('static',filename='img/blog_logo.svg')}}"
-          class="logo-img"
-          alt=""
-        />
-      </div>
-      <div class="right-nav">
-        <ul class="hlinks">
-          <li>Blog</li>
-          <li>About</li>
-          <li>Sign in</li>
-          <li>sss</li>
-        </ul>
-      </div>
-      </nav>
-      <div class="page-mid">
-        <div class="bg-img-container">
-          <img  class="bg-img" src="{{url_for('static',filename='img/Skilline_1.png')}}" alt="">
-        </div>
-        <div class="page-content">
+   <nav class="navbar">
+       <div class="blog_title">
+       <a href="{{url_for("main_page")}}">NeroIT</a>
+       </div>
+       <div class="right_navbar">
+           <ul>
+           <li><a href=#>HOME</a></li>
+           <li><a href=#>HOME</a></li>
+           <li><a href=#>Faq</a></li>
+            {% if session["username"] %}
+           <li><a href=#>{{session["username"]}}</a></li>
+            {% else %}
+            <li><a href="{{url_for("user.log_in")}}">Login</a></li>
+            <li><a href="{{url_for("user.signup")}}">Register</a></li>
+            {% endif %}
+           </ul>
+       </div>
+   </nav>
+      <div class="middle">
           {% block content %} {% endblock %}
-        </div>
       </div>
     </div>
     <footer></footer>

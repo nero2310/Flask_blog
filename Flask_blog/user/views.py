@@ -52,6 +52,7 @@ def log_in():
             user_data = database.find(how_many="one", data_filter={"username": form_data["username"]},
                                       projection={"username": 1})
             session["username"] = user_data["username"]
+            return redirect(url_for("main_page"))
     return render_template("auth/log_in_form.html", form=form)
 
 

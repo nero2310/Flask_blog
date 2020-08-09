@@ -20,7 +20,7 @@ def create_app():
         exit(0)
 
     @app.route("/")
-    def hello_word():
+    def main_page():
         return render_template("site/base.html")
 
     @app.route("/login")
