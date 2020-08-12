@@ -46,13 +46,15 @@ def log_in():
             "password": form.password.data,
         }
         user_password_hash = database.find(data_filter={"username": form_data["username"]},
-                                           projection={"password_hash": 1, "_id": 0})["password_hash"]
-        if bcrypt.checkpw(password=form_data["password"].encode("utf-8"),
-                          hashed_password=user_password_hash.encode("utf-8")):
-            user_data = database.find(how_many="one", data_filter={"username": form_data["username"]},
-                                      projection={"username": 1})
-            session["username"] = user_data["username"]
-            return redirect(url_for("main_page"))
+                                           projection={"password_hash": 1, "_id": 0})
+        if isinstance(user_password_hash, dict):
+            user_password_hash = user_password_hash["password_hash"]
+            if bcrypt.checkpw(password=form_data["password"].encode("utf-8"),
+                              hashed_password=user_password_hash.encode("utf-8")):
+                user_data = database.find(how_many="one", data_filter={"username": form_data["username"]},
+                                          projection={"username": 1})
+                session["username"] = user_data["username"]
+                return redirect(url_for("main_page"))
     return render_template("auth/log_in_form.html", form=form)
 
 

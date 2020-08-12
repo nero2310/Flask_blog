@@ -10,7 +10,8 @@ class Mongo:
         :arg database - database you will use
         :arg collection - collection you wii use
         """
-        mongo_client = MongoClient('localhost', 2717)
+        mongo_client = MongoClient("mongodb://172.16.0.2:2717/?readPreference=primary&appname=MongoDB%20Compass"
+                                   "%20Beta&ssl=false")
         db = mongo_client[database]
         self.collection = db[collection]
 
@@ -18,16 +19,19 @@ class Mongo:
         """:arg how_many how many results should be returned possible values "one" or "all"
         :arg data_filter filter data to return
         :arg projection specify whose columns values should be returned
-        :return string or list or None if nothing found"""
+        :return Dict or None if nothing found"""
         if projection is None:
             projection = {}
+
         if data_filter is None:
             data_filter = {}
+
         if how_many == "one":
             return self.collection.find_one(data_filter, projection)
+
         elif how_many == "all":
             cursor = self.collection.find(data_filter, projection)
-            return [document for document in cursor]
+            return {document for document in cursor}
 
     def insert(self, data_to_insert: Dict):
         """:arg data_to_insert data whose wil be inserted into database"""

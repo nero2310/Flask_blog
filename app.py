@@ -39,10 +39,10 @@ def create_app():
 if __name__ == "__main__":
     if environ["env"] == "development":
         app = create_app()
-        app.run(debug=True)
+        app.run(debug=True,host="0.0.0.0")
     elif environ["env"] == "production":
         app = create_app()
-        app.run(debug=False)
+        app.run(debug=False,host="0.0.0.0")
 
 # @login_manager.user_loader
 # def load_user(user_id):
