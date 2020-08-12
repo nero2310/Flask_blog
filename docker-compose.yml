@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  main-app:
+    build:
+      .
+    volumes:
+      - .:/usr/src/my_app
+    networks:
+      static-network:
+        ipv4_address: 172.16.0.3
+    ports:
+      - 5000:5000
+  mongo:
+    image: mongo:latest
+    command: mongod --port 2717
+    networks:
+      static-network:
+        ipv4_address: 172.16.0.2
+    ports:
+        - 2717:27017
+    volumes:
+    - ~/Docker_images/mongoDB_image:/data/db
+
+
+networks:
+  static-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet : 172.16.0.0/16
