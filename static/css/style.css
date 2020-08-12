@@ -68,7 +68,7 @@ a {
 .dropdown-element-1 a{
   white-space: nowrap;
   display: none !important;
-  background-color: orange;
+  background-color: lightgray;
   top: 52px;
   right: 0px;
   width: 150%;
@@ -76,10 +76,11 @@ a {
   color: darkblue !important;
   position: absolute;
 }
+
 .dropdown-element-2 a{
   white-space: nowrap;
   display: none !important;
-  background-color: orange;
+  background-color: lightgray;
   top: 102px;
   right: 0px;
   width: 150%;
