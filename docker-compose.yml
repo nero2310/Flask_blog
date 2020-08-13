@@ -20,7 +20,8 @@ services:
     ports:
         - 2717:27017
     volumes:
-    - ~/Docker_images/mongoDB_image:/data/db
+#    - ~/Docker_images/mongoDB_image:/data/db
+    - mongo_data:/data/db
 
 
 networks:
@@ -29,3 +30,7 @@ networks:
     ipam:
       config:
         - subnet : 172.16.0.0/16
+
+volumes:
+  mongo_data:
+    driver: local
