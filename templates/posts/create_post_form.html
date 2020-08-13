@@ -1,0 +1,23 @@
+{% extends "site/base.html" %}
+{% block content %}
+<form action={{url_for("posts.create_post")}} method="post">
+    <h1>Create a post</h1>
+    {{ form.csrf_token }}
+    {{form.title}}
+    {{form.content()}}
+    {{form.submit()}}
+    {% for field in form.errors %}
+    {% for error in form.errors[field] %}
+    <div class="error">{{ error }}</div>
+    {% endfor %}
+    {% endfor %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+        <h1>{{message}}</h1>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+</form>
+{% endblock %}

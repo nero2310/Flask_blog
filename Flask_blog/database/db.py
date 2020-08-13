@@ -31,7 +31,7 @@ class Mongo:
 
         elif how_many == "all":
             cursor = self.collection.find(data_filter, projection)
-            return {document for document in cursor}
+            return [document for document in cursor]
 
     def insert(self, data_to_insert: Dict):
         """:arg data_to_insert data whose wil be inserted into database"""
