@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 import bcrypt
 
 from Flask_blog.database.db import Mongo
@@ -24,11 +24,10 @@ def signup():
     if form.validate() and request.method == "POST":
         user = {
             "username": form.username.data,
-            "email": form.email.data,
             "password_hash": create_hash(form.password.data)
         }
         if database.find(data_filter={"username": form.username.data}) is None:
-            print(database.find({"username":form.username.data}))
+            print(database.find({"username": form.username.data}))
             database.insert(user)
             flash(message=f"Your account has been registered {form.username.data}")
             return redirect(url_for("user.signup_sucess", _method="GET"))
@@ -47,11 +46,15 @@ def log_in():
             "password": form.password.data,
         }
         user_password_hash = database.find(data_filter={"username": form_data["username"]},
-                                           projection={"password_hash": 1, "_id": 0})["password_hash"]
-        print(form_data["password"].encode("utf-8"), user_password_hash)
-        if bcrypt.checkpw(password=form_data["password"].encode("utf-8"),
-                          hashed_password=user_password_hash.encode("utf-8")):
-            print("It's work")
+                                           projection={"password_hash": 1, "_id": 0})
+        if isinstance(user_password_hash, dict):
+            user_password_hash = user_password_hash["password_hash"]
+            if bcrypt.checkpw(password=form_data["password"].encode("utf-8"),
+                              hashed_password=user_password_hash.encode("utf-8")):
+                user_data = database.find(how_many="one", data_filter={"username": form_data["username"]},
+                                          projection={"username": 1})
+                session["username"] = user_data["username"]
+                return redirect(url_for("main_page"))
     return render_template("auth/log_in_form.html", form=form)
 
 

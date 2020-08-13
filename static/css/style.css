@@ -1,98 +1,90 @@
 * {
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  position: relative;
+
+  /*background-color: #7d838c;*/
+  background-color:white;
+
 }
 
-nav {
-  height: 8vh;
-  width: 100%;
-  display: flex;
+.navbar {
+  position: relative;
+  display:flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 4px solid rgba(255, 102, 0, 0.822);
+  height: 8vh;
+  background-color: #333;
+  color:white;
+  width: 100%;
+  border-bottom: 3px solid rgb(126, 126, 143);
 }
 
-.logo-container {
-  height: 80%;
-  margin: 20px;
+.blog_title{
+  margin: 1.5rem;
+  font-size: 20px;
+  font-weight: bold;
 }
 
-.hlinks {
+.right_navbar ul{
+  margin: 0;
+  padding: 0;
   display: flex;
-  color: rgba(255, 102, 0, 0.822);
+}
+
+.right_navbar li{
   list-style: none;
-  font-family: "Recursive", sans-serif;
 }
 
-.hlinks li {
-  margin: 20px;
-  font-size: 1.5rem;
-  cursor: pointer;
+.right_navbar li a{
+  text-decoration:none;
+  color:white;
+  padding: 1rem;
+  display: block;
 }
 
-.right-nav {
-  margin: 50px;
+a {
+  color:inherit;
+  text-decoration: none;
 }
 
-.page-mid {
-  margin-top: 10px;
-  background-color: white;
-  height: 100%;
-  width: 100%;
+.dropdown {
+  clear: both;
   position: relative;
+  display:none;
 }
 
-.logo-img {
-  height: 100%;
+.dropdown:hover .dropdown-element-1 a{
+  display: block !important;
 }
 
-.bg-img-container {
-  margin: auto;
-  width: 80%;
-  border: 3px solid green;
-}
-.bg-img {
-  width: 100%;
+.dropdown:hover .dropdown-element-2 a{
+  display: block !important;
 }
 
-.page-content {
-  width: 60%;
-  height: 90%;
-  background-color: white;
+.dropdown-element-1 a{
+  white-space: nowrap;
+  display: none !important;
+  background-color: lightgray;
+  top: 52px;
+  right: 0px;
+  width: 150%;
+  padding: 20px !important;
+  color: darkblue !important;
   position: absolute;
-  top: 0;
-  left: 20%;
-  border-radius: 20px;
-  margin: 20px;
-  opacity: 0.9;
 }
 
-footer {
-  height: 10vh;
-  background-color: rgba(255, 102, 0, 0.822);
-  width: 100%;
-  display: flex;
-  position: fixed;
-  bottom: 0;
-}
-
-@media (max-width: 600px) {
-  .hlinks li {
-    font-size: 1.1rem;
-  }
-  .bg-img-container {
-    display: none;
-  }
-  .page-content {
-    width: 80%;
-    height: 90%;
-    left: 5%;
-  }
+.dropdown-element-2 a{
+  white-space: nowrap;
+  display: none !important;
+  background-color: lightgray;
+  top: 102px;
+  right: 0px;
+  width: 150%;
+  padding: 20px !important;
+  color: darkblue !important;
+  position: absolute;
 }
