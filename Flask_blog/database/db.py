@@ -5,13 +5,13 @@ from pymongo import MongoClient
 
 class Mongo:
     def __init__(self, database="test", collection="user",
-                 url="mongodb://172.16.0.2:2717/?readPreference""=primary&ssl=false",**kargs):
+                 url="mongodb://172.16.0.2:2717/?readPreference""=primary&ssl=false", **kwargs):
         """
         Class to work with mongoDB
         :arg database - database you will use
         :arg collection - collection you wii use
         """
-        mongo_client = MongoClient(url,**kargs)
+        mongo_client = MongoClient(url, **kwargs)
         db = mongo_client[database]
         self.collection = db[collection]
 
