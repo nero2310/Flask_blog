@@ -5,7 +5,7 @@ from Flask_blog.posts import forms
 
 posts = Blueprint("posts", __name__)
 
-database = Mongo(database="test", collection="posts")
+database = Mongo(database="test", collection="posts", ServerSelectionTimeoutMS=5000)
 
 
 @posts.route("/create", methods=["GET", "POST"])
