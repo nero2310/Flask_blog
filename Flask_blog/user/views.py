@@ -6,7 +6,7 @@ from Flask_blog.user.forms import UserRegisterForm, UserLoginForm
 
 user = Blueprint("user", __name__)
 
-database = Mongo()
+database = Mongo(database="test",collection="user")
 
 
 def create_hash(password: str):

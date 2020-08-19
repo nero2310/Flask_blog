@@ -10,6 +10,7 @@ class Mongo:
         Class to work with mongoDB
         :arg database - database you will use
         :arg collection - collection you wii use
+        :arg url - mongoDB url
         """
         mongo_client = MongoClient(url, **kwargs)
         db = mongo_client[database]
