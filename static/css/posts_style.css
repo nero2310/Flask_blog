@@ -1,0 +1,12 @@
+.post {
+    text-align: justify;
+    background-color: lightgray;
+    margin: 2% 15% 2% 15%;
+    /*margin: 10px 200px 10px 200px;*/
+}
+
+.post_title{
+    text-align: left;
+    font-weight: bold;
+    margin: 20px 0 10px 0;
+}

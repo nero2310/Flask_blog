@@ -1,0 +1,24 @@
+{% extends "site/base.html" %}
+{% block css %}
+<link
+        rel="stylesheet"
+        type="text/css"
+        href="{{url_for('static',filename='css/style.css')}}"
+/>
+<link
+        rel="stylesheet"
+        type="text/css"
+        href="{{url_for('static',filename='css/posts_style.css')}}"
+/>
+
+
+{% endblock %}
+{% block content %}
+{% for post in posts %}
+    <div class="post">
+        <div class="post_title">{{post.title}} </div>
+        <div class="post_content">{{post.content}} </div>
+        <div class="post_author">{{post.author}} </div>
+    </div>
+{% endfor %}
+{% endblock %}

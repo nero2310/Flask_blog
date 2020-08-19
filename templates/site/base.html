@@ -1,14 +1,17 @@
 <html lang="en">
   <head>
+      {% block css %}
     <link
       rel="stylesheet"
       type="text/css"
       href="{{url_for('static',filename='css/style.css')}}"
     />
+      {% endblock %}
     <link href="https://fonts.googleapis.com/css2?family=Recursive:wght@500&display=swap" rel="stylesheet">
     <meta charset="UTF-8" />
     {% block title %} {% endblock %}
   </head>
+
   <body>
    <nav class="navbar">
        <div class="blog_title">
@@ -16,7 +19,7 @@
        </div>
        <div class="right_navbar">
            <ul>
-           <li><a href=#>HOME</a></li>
+           <li><a href="{{url_for("posts.list_post")}}">Posts</a></li>
            <li><a href=#>HOME</a></li>
            <li><a href=#>Faq</a></li>
             {% if session["username"] %}
