@@ -19,7 +19,7 @@
        </div>
        <div class="right_navbar">
            <ul>
-           <li><a href=#>HOME</a></li>
+           <li><a href="{{url_for("posts.list_post")}}">Posts</a></li>
            <li><a href=#>HOME</a></li>
            <li><a href=#>Faq</a></li>
             {% if session["username"] %}
