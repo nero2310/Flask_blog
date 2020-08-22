@@ -17,7 +17,11 @@
 {% for post in posts %}
     <div class="post">
         <div class="post_title">{{post.title}} </div>
-        <div class="post_content">{{post.content}} </div>
+        {% if post.description %}
+        <div class="post_description">{{post.description}} </div>
+        {% else %}
+        <div class="post_description">This post doesn't contain description</div>
+        {% endif %}
         <div class="post_author">{{post.author}} </div>
     </div>
 {% endfor %}
