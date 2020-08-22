@@ -4,6 +4,7 @@
     <h1>Create a post</h1>
     {{ form.csrf_token }}
     {{form.title}}
+    {{form.description()}}
     {{form.content()}}
     {{form.submit()}}
     {% for field in form.errors %}

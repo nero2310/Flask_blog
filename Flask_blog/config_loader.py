@@ -26,5 +26,6 @@ def load_environment_variables(path_to_file=".env"):
     except FileExistsError:
         raise FileExistsError("Environment file not found")
 
+
 if __name__ == "__main__":
     create_base_config(".env")
