@@ -16,7 +16,7 @@ class Mongo:
         db = mongo_client[database]
         self.collection = db[collection]
 
-    def find(self, how_many="one", data_filter=None, projection=None):
+    def find(self, how_many="one", data_filter=None, projection=None, **kwargs):
         """:arg how_many how many results should be returned possible values "one" or "all"
         :arg data_filter filter data to return
         :arg projection specify whose columns values should be returned
@@ -28,15 +28,13 @@ class Mongo:
             data_filter = {}
 
         if how_many == "one":
-            return self.collection.find_one(data_filter, projection)
+            return self.collection.find_one(data_filter, projection, **kwargs)
 
         elif how_many == "all":
-            cursor = self.collection.find(data_filter, projection)
+            cursor = self.collection.find(data_filter, projection, **kwargs)
             return [document for document in cursor]
 
     def insert(self, data_to_insert: Dict):
         """:arg data_to_insert data whose wil be inserted into database"""
         self.collection.insert_one(data_to_insert)
 
-    def aggregate(self):
-        self.collection.aggregate()

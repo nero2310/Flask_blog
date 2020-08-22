@@ -26,6 +26,13 @@ def create_post():
     return render_template("posts/create_post_form.html", form=form)
 
 
+@posts.route("/<title>")
+def get_post(title):
+    post = database.find(how_many="one", data_filter={"approved": True},
+                         projection={"content": 1, "title": 1, "author": 1})
+    return render_template("posts/render_post.html", post=post)
+
+
 @posts.route("/", methods=["GET", "POST"])
 def list_post():
     all_post = database.find(how_many="all", data_filter={"approved": True},
