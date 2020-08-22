@@ -14,7 +14,7 @@ def create_base_config(path):
     else:
         config = f"secret_key={os.urandom(20).hex()}\n" \
                  f"env=production\n" \
-                 f"MONGO_URI='paste adress of your database here'"
+                 f"MONGO_URI=mongodb://172.16.0.2:2717/?readPreference=primary&ssl=false"
         with open(path, "w") as file:
             file.write(config)
 
