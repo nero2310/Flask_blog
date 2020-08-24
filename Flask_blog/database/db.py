@@ -1,11 +1,16 @@
 from typing import Dict
 
+from os import environ
 from pymongo import MongoClient
+
+from dotenv import load_dotenv
+
+load_dotenv(".env")
 
 
 class Mongo:
     def __init__(self, database="test", collection="user",
-                 url="mongodb://172.16.0.2:2717/?readPreference""=primary&ssl=false", **kwargs):
+                 url=environ["MONGO_URI"], **kwargs):
         """
         Class to work with mongoDB
         :arg database - database you will use
