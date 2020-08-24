@@ -2,6 +2,7 @@ venv
 .idea
 bootstrap-5.0.0-alpha1-dist
 bootstrap-5.0.0-alpha1-dist.zip
-*/__pycache__
+__pycache__/
 confsig.json
 .env
+toDO
