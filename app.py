@@ -33,7 +33,6 @@ def create_app():
 
     app.register_blueprint(user, url_prefix="/auth")
     app.register_blueprint(posts, url_prefix="/posts")
-
     @app.errorhandler(ServerSelectionTimeoutError)
     def database_timeout(e):
         return render_template("errors/database_timeout.html")
