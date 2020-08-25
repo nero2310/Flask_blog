@@ -26,7 +26,7 @@ export FLASK_APP=app.py
 python3 -m flask run
 ```
 If you wanna run Flask server in debug mode change 
-variable env to production in .env file 
+variable env to production in .env file  \
 Change MONGO_URI to your mongoDB server adress
 
 # Contribution 
