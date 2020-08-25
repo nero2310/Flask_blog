@@ -27,7 +27,6 @@ def signup():
             "password_hash": create_hash(form.password.data)
         }
         if database.find(data_filter={"username": form.username.data}) is None:
-            print(database.find({"username": form.username.data}))
             database.insert(user)
             flash(message=f"Your account has been registered {form.username.data}")
             return redirect(url_for("user.signup_sucess", _method="GET"))

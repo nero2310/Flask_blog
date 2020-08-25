@@ -15,7 +15,6 @@ database = Mongo(database="test", collection="posts", ServerSelectionTimeoutMS=5
 def create_post():
     insert_sucess = True
     form = forms.CreatePostForm(request.form)
-    print(form.validate())
     if form.validate() and request.method == "POST":
         if not "username" in session:
             flash("You have to be logged in to add a post")
