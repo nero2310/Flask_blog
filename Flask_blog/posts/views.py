@@ -1,7 +1,5 @@
 from flask import Blueprint, render_template, request, session, flash
 from pymongo.errors import DuplicateKeyError
-import markdown
-import markdown.extensions.fenced_code
 
 from Flask_blog.database.db import Mongo
 from Flask_blog.posts import forms
@@ -29,7 +27,7 @@ def create_post():
             try:
                 database.insert(post)
             except DuplicateKeyError:
-                insert_sucess=False
+                insert_sucess = False
                 flash("This post title exist")
             if insert_sucess:
                 flash("Post was created")
@@ -39,7 +37,7 @@ def create_post():
 
 @posts.route("/<title>")
 def get_post(title):
-    post = database.find(how_many="one", data_filter={"approved": True,"title":title},
+    post = database.find(how_many="one", data_filter={"approved": True, "title": title},
                          projection={"content": 1, "author": 1, "title": 1})
     return render_template("posts/render_post.html", post=post)
 
