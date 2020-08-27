@@ -24,7 +24,8 @@ def signup():
     if form.validate() and request.method == "POST":
         user = {
             "username": form.username.data,
-            "password_hash": create_hash(form.password.data)
+            "password_hash": create_hash(form.password.data),
+            "trusted_user": False  # trusted_user posts will not be protected from xss attack
         }
         if database.find(data_filter={"username": form.username.data}) is None:
             database.insert(user)

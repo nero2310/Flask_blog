@@ -7,5 +7,5 @@ from os import environ
 def test_connection():
     load_environment_variables()
     assert environ["MONGO_URI"]
-    mongo_instance = Mongo(url=environ["MONGO_URI"],ServerSelectionTimeoutMS=5000)
+    mongo_instance = Mongo(url=environ["MONGO_URI"], ServerSelectionTimeoutMS=5000)
     mongo_instance.find()

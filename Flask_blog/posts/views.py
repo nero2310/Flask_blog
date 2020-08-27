@@ -6,11 +6,10 @@ from Flask_blog.posts import forms
 
 posts = Blueprint("posts", __name__)
 
-database = Mongo(database="test", collection="posts", ServerSelectionTimeoutMS=5000)
-
 
 @posts.route("/create", methods=["GET", "POST"])
 def create_post():
+    database = Mongo(database="test", collection="posts", ServerSelectionTimeoutMS=5000)
     insert_success = True
     form = forms.CreatePostForm(request.form)
     if form.validate() and request.method == "POST":
@@ -22,6 +21,7 @@ def create_post():
                 "content": form.content.data,
                 "description": form.description.data,
                 "approved": False,
+                "xss_protection_disabled": False,
                 "author": session["username"]
             }
             try:
@@ -35,13 +35,17 @@ def create_post():
 
 @posts.route("/<title>")
 def get_post(title):
+    database = Mongo(database="test", collection="posts", ServerSelectionTimeoutMS=5000)
     post = database.find(how_many="one", data_filter={"approved": True, "title": title},
-                         projection={"content": 1, "author": 1, "title": 1})
-    return render_template("posts/render_post.html", post=post)
+                         projection={"content": 1, "author": 1, "title": 1,"xss_protection_disabled":1})
+    database = Mongo(database="test", collection="user", ServerSelectionTimeoutMS=5000)
+    author = database.find(how_many="one", data_filter={"username": post["author"]},projection={"trusted_user":1})
+    return render_template("posts/render_post.html", post=post, author=author)
 
 
 @posts.route("/", methods=["GET", "POST"])
 def list_post():
+    database = Mongo(database="test", collection="posts", ServerSelectionTimeoutMS=5000)
     all_post = database.find(how_many="all", data_filter={"approved": True},
                              projection={"content": 1, "title": 1, "description": 1, "author": 1})
     return render_template("posts/show_posts.html", posts=all_post)

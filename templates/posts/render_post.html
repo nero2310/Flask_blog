@@ -1,4 +1,8 @@
 {% extends "site/base.html" %}
 {% block content %}
+{% if post["xss_protection_disabled"] or author["trusted_user"] %}
+{{post["content"]|safe}}
+{% else %}
 {{post["content"]}}
+{% endif %}
 {% endblock %}
