@@ -11,7 +11,7 @@ database = Mongo(database="test", collection="posts", ServerSelectionTimeoutMS=5
 
 @posts.route("/create", methods=["GET", "POST"])
 def create_post():
-    insert_sucess = True
+    insert_success = True
     form = forms.CreatePostForm(request.form)
     if form.validate() and request.method == "POST":
         if not "username" in session:
@@ -26,12 +26,10 @@ def create_post():
             }
             try:
                 database.insert(post)
-            except DuplicateKeyError:
-                insert_sucess = False
-                flash("This post title exist")
-            if insert_sucess:
                 flash("Post was created")
                 flash("Admin soon will check your post")
+            except DuplicateKeyError:
+                flash("This post title exist")
     return render_template("posts/create_post_form.html", form=form)
 
 
