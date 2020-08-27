@@ -37,9 +37,9 @@ def create_post():
 def get_post(title):
     database = Mongo(database="test", collection="posts", ServerSelectionTimeoutMS=5000)
     post = database.find(how_many="one", data_filter={"approved": True, "title": title},
-                         projection={"content": 1, "author": 1, "title": 1,"xss_protection_disabled":1})
+                         projection={"content": 1, "author": 1, "title": 1, "xss_protection_disabled": 1})
     database = Mongo(database="test", collection="user", ServerSelectionTimeoutMS=5000)
-    author = database.find(how_many="one", data_filter={"username": post["author"]},projection={"trusted_user":1})
+    author = database.find(how_many="one", data_filter={"username": post["author"]}, projection={"trusted_user": 1})
     return render_template("posts/render_post.html", post=post, author=author)
 
 

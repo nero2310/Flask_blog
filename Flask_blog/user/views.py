@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 import bcrypt
+from werkzeug.utils import redirect
 
 from Flask_blog.database.db import Mongo
 from Flask_blog.user.forms import UserRegisterForm, UserLoginForm
@@ -20,6 +21,7 @@ def create_hash(password: str):
 
 @user.route("/register", methods=["GET", "POST"])
 def signup():
+    database = Mongo(database="test", collection="user", ServerSelectionTimeoutMS=5000)
     form = UserRegisterForm(request.form)
     if form.validate() and request.method == "POST":
         user = {
@@ -41,23 +43,37 @@ def signup():
 def log_in():
     form = UserLoginForm(request.form)
     if form.validate() and request.method == "POST":
-        form_data = {
-            "username": form.username.data,
-            "password": form.password.data,
-        }
-        user_password_hash = database.find(data_filter={"username": form_data["username"]},
-                                           projection={"password_hash": 1, "_id": 0})
-        if isinstance(user_password_hash, dict):
-            user_password_hash = user_password_hash["password_hash"]
-            if bcrypt.checkpw(password=form_data["password"].encode("utf-8"),
-                              hashed_password=user_password_hash.encode("utf-8")):
-                user_data = database.find(how_many="one", data_filter={"username": form_data["username"]},
-                                          projection={"username": 1})
-                session["username"] = user_data["username"]
-                return redirect(url_for("main_page"))
+        if password_checker(form.username.data, form.password.data):
+            session["username"] = form.password.data
+            return redirect(url_for("main_page"))
     return render_template("auth/log_in_form.html", form=form)
 
 
 @user.route("/sucess", methods=["GET"])
 def signup_sucess():
     return render_template("auth/sucess.html")
+
+
+@user.route("/logout")
+def logout():
+    session.pop("username")
+    return redirect(url_for("main_page"))
+
+
+def password_checker(username, password) -> bool:
+    """
+    Chceck if password is equal to user password
+    :param username:check password for this user
+    :param password:
+    :return:
+    True if password match, False otherwise
+    """
+    database = Mongo(database="test", collection="user", ServerSelectionTimeoutMS=5000)
+    user_password_hash_db = database.find(data_filter={"username": username},
+                                          projection={"password_hash": 1, "_id": 0})
+    if isinstance(user_password_hash_db, dict):
+        print(user_password_hash_db)
+        if bcrypt.checkpw(password.encode("utf-8"),
+                          hashed_password=user_password_hash_db["password_hash"].encode("utf-8")):
+            return True
+    return False

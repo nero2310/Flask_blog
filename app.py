@@ -1,10 +1,11 @@
 from os import environ
 
-from flask import Flask, render_template, redirect, url_for, session
+from flask import Flask, render_template
 from pymongo.errors import ServerSelectionTimeoutError
 
 from Flask_blog.user.views import user
 from Flask_blog.posts.views import posts
+from Flask_blog.admin.views import admin_page
 from Flask_blog.config_loader import load_environment_variables
 
 load_environment_variables(".env")
@@ -22,17 +23,9 @@ def create_app():
     def main_page():
         return render_template("site/base.html")
 
-    @app.route("/login")
-    def login_page():
-        return render_template("auth/signup_form.html")
-
-    @app.route("/logout")
-    def logout():
-        session.pop("username")
-        return redirect(url_for("main_page"))
-
     app.register_blueprint(user, url_prefix="/auth")
     app.register_blueprint(posts, url_prefix="/posts")
+    app.register_blueprint(admin_page, url_prefix="/admin")
     @app.errorhandler(ServerSelectionTimeoutError)
     def database_timeout(e):
         return render_template("errors/database_timeout.html")

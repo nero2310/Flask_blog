@@ -27,7 +27,7 @@
             <ul class="dropdown">
                 <li><a href=#>{{session["username"]}}</a></li>
                 <li class="dropdown-element-1"><a href="">Profile</a></li>
-                <li class="dropdown-element-2"><a href="{{url_for("logout")}}">Sign out</a></li>
+                <li class="dropdown-element-2"><a href="{{url_for("user.logout")}}">Sign out</a></li>
             </ul>
             </div>
             {% else %}
