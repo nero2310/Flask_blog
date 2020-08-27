@@ -44,7 +44,7 @@ def log_in():
     form = UserLoginForm(request.form)
     if form.validate() and request.method == "POST":
         if password_checker(form.username.data, form.password.data):
-            session["username"] = form.password.data
+            session["username"] = form.username.data
             return redirect(url_for("main_page"))
     return render_template("auth/log_in_form.html", form=form)
 
