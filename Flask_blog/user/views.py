@@ -27,7 +27,8 @@ def signup():
         user = {
             "username": form.username.data,
             "password_hash": create_hash(form.password.data),
-            "trusted_user": False  # trusted_user posts will not be protected from xss attack
+            "trusted_user": False,  # trusted_user posts will not be protected from xss attack
+            "is_admin": False  # this have to be a bool don't use it like string "False" boolean value is true !!!
         }
         if database.find(data_filter={"username": form.username.data}) is None:
             database.insert(user)
