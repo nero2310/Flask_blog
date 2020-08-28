@@ -72,7 +72,6 @@ def password_checker(username, password) -> bool:
     user_password_hash_db = database.find(data_filter={"username": username},
                                           projection={"password_hash": 1, "_id": 0})
     if isinstance(user_password_hash_db, dict):
-        print(user_password_hash_db)
         if bcrypt.checkpw(password.encode("utf-8"),
                           hashed_password=user_password_hash_db["password_hash"].encode("utf-8")):
             return True
