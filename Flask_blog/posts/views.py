@@ -10,7 +10,6 @@ posts = Blueprint("posts", __name__)
 @posts.route("/create", methods=["GET", "POST"])
 def create_post():
     database = Mongo(database="test", collection="posts", ServerSelectionTimeoutMS=5000)
-    insert_success = True
     form = forms.CreatePostForm(request.form)
     if form.validate() and request.method == "POST":
         if not "username" in session:
